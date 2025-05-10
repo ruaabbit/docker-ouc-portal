@@ -22,6 +22,9 @@ RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /docker-ouc-portal mai
 # 使用一个轻量级的 Alpine 镜像作为最终的运行环境
 FROM alpine:latest
 
+# 设置时区
+RUN apk --no-cache add tzdata
+
 # 设置工作目录
 WORKDIR /root/
 
@@ -35,6 +38,7 @@ COPY --from=builder /docker-ouc-portal .
 # EXPOSE 8080
 
 # 设置默认的环境变量 (用户可以在 docker run 时覆盖)
+ENV TZ="Asia/Shanghai"
 ENV WLJF_USERNAME=""
 ENV WLJF_PASSWORD=""
 ENV WLJF_MODE="XHA"
