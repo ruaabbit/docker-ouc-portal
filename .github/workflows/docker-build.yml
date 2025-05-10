@@ -20,6 +20,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
+          tags: docker-ouc-portal:latest # 为镜像指定名称和标签
           push: false
           outputs: type=docker,dest=/tmp/image.tar # 将镜像导出为 tar 文件到 /tmp/image.tar
 
