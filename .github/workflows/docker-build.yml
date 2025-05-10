@@ -21,20 +21,47 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build Docker image and export
-        uses: docker/build-push-action@v6
+      - name: Build and export Docker image (linux/amd64)
+        uses: docker/build-push-action@v4
         with:
           context: .
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64
           push: false
-          outputs: type=oci, dest=/tmp/docker-image.tar
-          tags: |
-            docker-ouc-portal:latest
-            docker-ouc-portal:arm64-latest
-            docker-ouc-portal:arm-latest
+          outputs: type=docker,dest=/tmp/docker-image-amd64.tar
+          tags: docker-ouc-portal:latest-amd64
 
-      - name: Upload artifact
+      - name: Upload amd64 artifact
         uses: actions/upload-artifact@v4
         with:
-          name: docker-image
-          path: /tmp/docker-image.tar # 上传导出的镜像文件作为构建产物
+          name: docker-image-amd64
+          path: /tmp/docker-image-amd64.tar
+
+      - name: Build and export Docker image (linux/arm64)
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          platforms: linux/arm64
+          push: false
+          outputs: type=docker,dest=/tmp/docker-image-arm64.tar
+          tags: docker-ouc-portal:latest-arm64
+
+      - name: Upload arm64 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image-arm64
+          path: /tmp/docker-image-arm64.tar
+
+      - name: Build and export Docker image (linux/arm/v7)
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          platforms: linux/arm/v7
+          push: false
+          outputs: type=docker,dest=/tmp/docker-image-armv7.tar
+          tags: docker-ouc-portal:latest-armv7
+
+      - name: Upload armv7 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image-armv7
+          path: /tmp/docker-image-armv7.tar
