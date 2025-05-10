@@ -6,12 +6,10 @@ WORKDIR /app
 
 # 复制 Go 模块文件
 COPY go.mod ./
-COPY go.sum ./
-# 如果没有 go.mod 和 go.sum, 可以先运行 go mod init <module-name> 和 go mod tidy
-# 对于本项目这种单文件应用，如果还没有 go.mod, 可以先在本地生成或直接复制源码
+RUN go mod tidy
 
-# 下载依赖 (如果 go.mod 和 go.sum 存在且定义了依赖)
-# RUN go mod download
+# 下载依赖
+RUN go mod download
 
 # 复制源代码到容器中
 COPY main.go ./
