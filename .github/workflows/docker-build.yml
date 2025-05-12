@@ -22,7 +22,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build and export Docker image (linux/amd64)
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           context: .
           platforms: linux/amd64
@@ -37,7 +37,7 @@ jobs:
           path: /tmp/docker-image-amd64.tar
 
       - name: Build and export Docker image (linux/arm64)
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           context: .
           platforms: linux/arm64
