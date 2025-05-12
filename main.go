@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"io"
 	"log"
@@ -145,8 +146,13 @@ func login(username, password, authURL string) {
 	// 为安全起见，不在日志中完整打印包含密码的 URL
 	log.Printf("发送认证请求至: %s (参数已编码)", authURL)
 
+	// 创建一个自定义的 Transport，用于忽略 SSL 证书错误
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
 	client := http.Client{
-		Timeout: 10 * time.Second, // 设置请求超时
+		Transport: tr,
+		Timeout:   10 * time.Second, // 设置请求超时
 	}
 
 	req, err := http.NewRequest("GET", fullURL, nil)
