@@ -13,14 +13,14 @@ import (
 )
 
 const (
-	defaultCheckIntervalSeconds = 60
-	defaultCheckTargetHost      = "www.baidu.com:80" // 默认检测 HTTP，HTTPS 可能需要证书
+	defaultCheckIntervalSeconds = 600
+	defaultCheckTargetHost      = "https://www.baidu.com/"
 	defaultAuthMode             = "XHA"
 )
 
 var (
 	authURLs = map[string]string{
-		"XHA": "https://xha.ouc.edu.cn:802/eportal/portal/login",
+		"XHA": "https://192.168.101.201:802/eportal/portal/login",
 		// 可以根据 README 或实际情况添加其他模式的 URL
 		// "WXRZ": "https://wxrz.ouc.edu.cn:802/eportal/portal/login", // 示例
 		// "YXRZ": "https://yxrz.ouc.edu.cn:802/eportal/portal/login", // 示例
@@ -249,6 +249,6 @@ func checkAndLogin(username, password, authURL, checkTargetHost string) {
 		login(username, password, authURL)
 	} else {
 		// 如果网络已通，则不执行任何操作
-		log.Println("网络连接正常，本次无需认证。")
+		// log.Println("网络连接正常，本次无需认证。")
 	}
 }

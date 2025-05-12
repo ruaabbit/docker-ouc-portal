@@ -62,8 +62,8 @@ docker run -d \
 - `WLJF_USERNAME`: 您的 OUC 校园网用户名。
 - `WLJF_PASSWORD`: 您的 OUC 校园网密码。
 - `WLJF_MODE` (可选): 认证请求的模式，例如：XHA,WXRZ,YXRZ。默认为 XHA。
-- `CHECK_INTERVAL_SECONDS` (可选): 网络状态检测的时间间隔（单位：秒）。默认为 60 秒。
-- `CHECK_TARGET_HOST` (可选): 用于检测网络连通性的目标主机。默认为 `www.baidu.com:80`。
+- `CHECK_INTERVAL_SECONDS` (可选): 网络状态检测的时间间隔（单位：秒）。默认为 600 秒。
+- `CHECK_TARGET_HOST` (可选): 用于检测网络连通性的目标主机。默认为 `https://www.baidu.com/`。
 - `TZ`(可选): 时区。
 
 ## 待办事项 (TODO)
