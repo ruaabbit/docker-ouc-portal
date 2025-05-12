@@ -23,6 +23,8 @@ jobs:
 
       - name: Build and export Docker image (linux/amd64)
         uses: docker/build-push-action@v6
+        env:
+          DOCKER_BUILD_RECORD_UPLOAD: false
         with:
           context: .
           platforms: linux/amd64
@@ -38,6 +40,8 @@ jobs:
 
       - name: Build and export Docker image (linux/arm64)
         uses: docker/build-push-action@v6
+        env:
+          DOCKER_BUILD_RECORD_UPLOAD: false
         with:
           context: .
           platforms: linux/arm64
