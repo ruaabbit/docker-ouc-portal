@@ -25,16 +25,16 @@ FROM alpine:latest
 # 设置时区
 RUN apk --no-cache add tzdata
 
+# 程序需要访问 CA 证书 (例如，进行 HTTPS 请求到外部服务)
+RUN apk --no-cache add ca-certificates && update-ca-certificates
+
 # 设置工作目录
 WORKDIR /root/
 
 # 从构建阶段复制编译好的二进制文件
 COPY --from=builder /docker-ouc-portal .
 
-# （可选）如果程序需要访问 CA 证书 (例如，进行 HTTPS 请求到外部服务)
-# RUN apk --no-cache add ca-certificates
-
-# 暴露程序可能使用的端口 (如果程序本身监听端口的话，本项目不监听)
+# 暴露程序可能使用的端口
 # EXPOSE 8080
 
 # 设置默认的环境变量 (用户可以在 docker run 时覆盖)
