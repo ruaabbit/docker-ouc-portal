@@ -42,8 +42,8 @@ ENV TZ="Asia/Shanghai"
 ENV WLJF_USERNAME=""
 ENV WLJF_PASSWORD=""
 ENV WLJF_MODE="XHA"
-ENV CHECK_INTERVAL_SECONDS="60"
-ENV CHECK_TARGET_HOST="www.baidu.com:80"
+ENV CHECK_INTERVAL_SECONDS="600"
+ENV CHECK_TARGET_HOST="https://www.baidu.com/"
 
 # 容器启动时运行的命令
 CMD ["./docker-ouc-portal"]
